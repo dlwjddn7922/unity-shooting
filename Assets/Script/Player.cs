@@ -66,11 +66,23 @@ public class Player : MonoBehaviour
                 //게임오브젝트를 생성시키는함수
                 PlayerBullet b = Instantiate(bullet, parent);
                 b.speed = bulletSpeed;
+                b.name = "pBullet";
                 b.transform.SetParent(bulletParent);
                 fireTimer = 0;
+                Destroy(b.gameObject, 2f);
             }
         }
 
-        
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<PlayerBullet>())
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.transform.GetComponent<EnemyA>())
+        {
+            Destroy(gameObject);
+        }
     }
 }
