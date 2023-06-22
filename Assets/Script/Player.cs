@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
                 PlayerBullet b = Instantiate(bullet, parent);
                 b.speed = bulletSpeed;
                 b.name = "pBullet";
+                b.power = 5;
                 b.transform.SetParent(bulletParent);
                 fireTimer = 0;
                 Destroy(b.gameObject, 2f);
