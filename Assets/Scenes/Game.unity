@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &47468106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47468107}
+  m_Layer: 0
+  m_Name: EnemyBulletParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47468107
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47468106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &65965543
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +268,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1117219040}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &95487563
 SpriteRenderer:
@@ -291,11 +322,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &172241506 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2946202316071784926, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
-  m_PrefabInstance: {fileID: 2946202316235105212}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &478935336
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +920,7 @@ MonoBehaviour:
   parent: {fileID: 914807717}
   bulletParent: {fileID: 1350680979}
   speed: 3
-  bulletSpeed: 15
+  bulletSpeed: 20
   fireDelayTime: 0.3
 --- !u!114 &866526601
 MonoBehaviour:
@@ -1089,9 +1115,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 827842948}
-  - {fileID: 172241506}
-  - {fileID: 1936361122}
   - {fileID: 95487562}
+  - {fileID: 1936361122}
+  - {fileID: 1292198514}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1126,6 +1152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 2946202316071784922, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
   parent: {fileID: 478935338}
+  enemyBulletParent: {fileID: 47468107}
   spawnBox: {fileID: 478935337}
 --- !u!4 &1221208658
 Transform:
@@ -1197,6 +1224,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1292198514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2946202316071784926, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
+  m_PrefabInstance: {fileID: 1881419138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1303519067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1366,26 +1398,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1936361122 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8643437635755528939, guid: 70ffa6aa04b261942b3441fa3be38aed, type: 3}
-  m_PrefabInstance: {fileID: 8643437637108618313}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2946202316235105212
+--- !u!1001 &1881419138
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1117219040}
     m_Modifications:
-    - target: {fileID: 2946202316071784922, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
-      propertyPath: hitSP.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2946202316071784922, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
-      propertyPath: hitSP.Array.data[1]
-      value: 
-      objectReference: {fileID: 8414478535512612329, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
     - target: {fileID: 2946202316071784925, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
       propertyPath: m_Name
       value: Enemy A
@@ -1396,7 +1415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2946202316071784926, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2946202316071784926, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1440,6 +1459,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b40eed1fa3cfc18419acd218b1bf8ae7, type: 3}
+--- !u!4 &1936361122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8643437635755528939, guid: 70ffa6aa04b261942b3441fa3be38aed, type: 3}
+  m_PrefabInstance: {fileID: 8643437637108618313}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8643437637108618313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1450,6 +1474,10 @@ PrefabInstance:
     - target: {fileID: 8643437635755528936, guid: 70ffa6aa04b261942b3441fa3be38aed, type: 3}
       propertyPath: m_Name
       value: Enemy B
+      objectReference: {fileID: 0}
+    - target: {fileID: 8643437635755528936, guid: 70ffa6aa04b261942b3441fa3be38aed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8643437635755528939, guid: 70ffa6aa04b261942b3441fa3be38aed, type: 3}
       propertyPath: m_RootOrder

@@ -6,6 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyA enemy;
     [SerializeField] private Transform parent;
+    [SerializeField] protected Transform enemyBulletParent;
 
     [SerializeField] private BoxCollider2D spawnBox;
     // Start is called before the first frame update
@@ -32,7 +33,9 @@ public class EnemyController : MonoBehaviour
         Vector3 randomPos = new Vector3(sizeX, sizeY, 0f);
 
         Vector3 randPos = pos + randomPos;
-        Instantiate(enemy,randPos,Quaternion.identity,parent);
+        Enemy e = Instantiate(enemy,randPos,Quaternion.identity,parent);
+        e.SetBulletParent(enemyBulletParent);
+
         
     }
 }
