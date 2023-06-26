@@ -20,6 +20,6 @@ public class EnemyBulletA : MonoBehaviour
     }
     public void Hit()
     {
-        e.DestoryBullet(this);
+        e.DestroyBullet(this);
     }
 }

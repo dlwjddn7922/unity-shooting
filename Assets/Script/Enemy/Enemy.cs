@@ -23,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
     private Transform enemyBulletParent;
     private Player p;
     private List<EnemyBulletA> bullets = new List<EnemyBulletA>();
+    private List<Item> items = new List<Item>();
     private float fireTimer;
     // Update is called once per frame
     void Update()
@@ -52,22 +53,13 @@ public abstract class Enemy : MonoBehaviour
             b.SetEnemy(this);
         }
         //화면 밖으로 이동하는 미사일 삭제
-       
-        if(transform.position.y < -6)
-        {
-                Destroy(gameObject);
-        }
 
-        //화면 밖으로 이동시 삭제
-        for (int i = bullets.Count - 1; i >= 0; i--)
+        if (transform.position.y < -5.5f)
         {
-            if (bullets.Contains(bullet))
-            {
-                Destroy(bullets[i].gameObject);
-                bullets.RemoveAt(i);
-                break;
-            }
+            DestroyBullet(null);
+            Destroy(gameObject);
         }
+        
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -84,23 +76,38 @@ public abstract class Enemy : MonoBehaviour
         sa = GetComponent<SpriteAnimation>();
         firePos = transform.GetChild(0);
         p = FindAnyObjectByType<Player>();
-        
+        //아이템 리스트 만들기
+        Item[] items = Resources.LoadAll<Item>("Item");
+
+        foreach (var item in items)
+        {
+            this.items.Add(item);
+        }
     }
     public void SetBulletParent(Transform t)
     {
         enemyBulletParent = t;
     }
-    public void DestoryBullet(EnemyBulletA bullet)
+    public void DestroyBullet(EnemyBulletA bullet)
     {
-        for (int i = bullets.Count -1; i >= 0; i--)
+        for (int i = bullets.Count - 1; i >= 0; i--)
         {
-            if(bullets.Contains(bullet))
+            if (bullet == null)
             {
                 Destroy(bullets[i].gameObject);
                 bullets.RemoveAt(i);
-                break;
+            }
+            else
+            {
+                if (bullets[i].Equals(bullet))
+                {
+                    Destroy(bullets[i].gameObject);
+                    bullets.RemoveAt(i);
+                    break;
+                }
             }
         }
+        
     }
     public void Hit(float dmg)
     {
@@ -116,6 +123,26 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
-        sa.SetSprite(explosionSP, 0.1f, () => Destroy(gameObject));
+        sa.SetSprite(
+            explosionSP, 0.1f,
+            () => 
+            {
+                //아이템 생성
+                int rand = Random.Range(1, 101);
+
+                string spawnStr = rand < 60 ? "Coin" : rand < 80 ? "Power" : "Boom";
+                for (int i = 0; i < items.Count; i++)
+                {
+                   if(items[i].name == spawnStr)
+                    {
+                        Instantiate(items[i], transform.position, Quaternion.identity);
+                        break;
+                    }
+                }
+                Destroy(gameObject);
+            }
+          );
+
+        //아이템 
     }
 }

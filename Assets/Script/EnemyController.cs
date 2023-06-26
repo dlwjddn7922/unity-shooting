@@ -15,12 +15,6 @@ public class EnemyController : MonoBehaviour
         InvokeRepeating("RandomPosition", 0.5f,1f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void RandomPosition()//·£´ý½ºÆù
     {
         Vector3 pos = parent.localPosition;

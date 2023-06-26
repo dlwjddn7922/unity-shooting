@@ -77,13 +77,13 @@ public class Player : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlayerBullet>())
+        if(collision.GetComponent<EnemyBulletA>())
         {
-            Destroy(collision.gameObject);
+            collision.GetComponent<EnemyBulletA>().Hit();
         }
         if (collision.transform.GetComponent<EnemyA>())
         {
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
     }
 }
