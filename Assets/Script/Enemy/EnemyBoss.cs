@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyB : Enemy
+public class EnemyBoss : Enemy
 {
     public override void Init()
     {
-        data.speed = 0.5f;
-        data.hp = 20;
-        data.fireDelayTime = 2f;
+        data.speed = 0.1f;
+        data.hp = 30;
+        data.fireDelayTime = 5f;
         base.Init();
     }
 

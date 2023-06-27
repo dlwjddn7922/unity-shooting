@@ -81,7 +81,20 @@ public class Player : MonoBehaviour
         {
             collision.GetComponent<EnemyBulletA>().Hit();
         }
-        if (collision.transform.GetComponent<EnemyA>())
+
+        if (collision.transform.GetComponent<Enemy>())
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.GetComponent<BoomItem>())
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.GetComponent<PowerItem>())
+        {
+            Destroy(collision.gameObject);
+        }
+        if (collision.GetComponent<CoinItem>())
         {
             Destroy(collision.gameObject);
         }

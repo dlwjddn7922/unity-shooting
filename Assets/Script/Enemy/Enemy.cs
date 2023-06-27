@@ -46,11 +46,14 @@ public abstract class Enemy : MonoBehaviour
         fireTimer += Time.deltaTime;
         if( fireTimer >= data.fireDelayTime)
         {
-            fireTimer = 0;
-            EnemyBulletA b = Instantiate(bullet, firePos);
-            b.transform.SetParent(enemyBulletParent);
-            bullets.Add(b);
-            b.SetEnemy(this);
+            if (transform.position.y > -4f)
+            {
+                fireTimer = 0;
+                EnemyBulletA b = Instantiate(bullet, firePos);
+                b.transform.SetParent(enemyBulletParent);
+                bullets.Add(b);
+                b.SetEnemy(this);
+            }
         }
         //화면 밖으로 이동하는 미사일 삭제
 
@@ -123,6 +126,7 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(GetComponent<Rigidbody2D>());
         GetComponent<CircleCollider2D>().enabled = false;
+        
         sa.SetSprite(
             explosionSP, 0.1f,
             () => 
