@@ -8,6 +8,14 @@ public class UI : MonoBehaviour
 {
     public static UI instance;
     [SerializeField] private TMP_Text txt;
+    [SerializeField] private Image hpimage;
+    [SerializeField] private TMP_Text hptxt;
+    [SerializeField] private Image mpimage;
+    [SerializeField] private TMP_Text mptxt;
+    float curHp = 100;
+    float maxHp = 100;
+    float curMp = 100;
+    float maxMp = 100;
     int score;
     public int SetScore
     {
@@ -22,6 +30,43 @@ public class UI : MonoBehaviour
     private void Start()
     {
         instance = this;
-        //txt.fontSize = 70;
+        float value = curHp / maxHp;
+        hpimage.fillAmount = value;
+        hptxt.text = $"{(int)(value * 100f)} / {maxHp}";
+        value = curMp / maxMp;
+        mpimage.fillAmount = value;
+        mptxt.text = $"{(int)(value * 100f)} / {maxMp}";
+    }
+    public void Update()
+    {
+        if (Input.GetKey(KeyCode.F1))
+        {
+            if(Random.Range(0,10) < 5)
+            {
+                curHp += Random.Range(5, 10);
+            }
+            else
+            {
+                curHp -= Random.Range(5, 10);
+            }
+            float value = curHp / maxHp;
+            hpimage.fillAmount = value;
+            hptxt.text = $"{(int)(value * maxHp)} / {maxHp}";
+        }
+        if (Input.GetKey(KeyCode.F2))
+        {
+            if (Random.Range(0, 10) < 5)
+            {
+                curMp += Random.Range(5, 10);
+            }
+            else
+            {
+                curMp -= Random.Range(5, 10);
+            }
+            float value = curMp / maxMp;
+            mpimage.fillAmount = value;
+            mptxt.text = $"{(int)(value * maxMp)} / {maxMp}";
+        }
+
     }
 }
