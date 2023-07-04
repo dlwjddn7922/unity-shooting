@@ -12,10 +12,16 @@ public class UI : MonoBehaviour
     [SerializeField] private TMP_Text hptxt;
     [SerializeField] private Image mpimage;
     [SerializeField] private TMP_Text mptxt;
+    [SerializeField] private Image coolImage;
+    [SerializeField] private TMP_Text coolText;
     float curHp = 100;
     float maxHp = 100;
     float curMp = 100;
     float maxMp = 100;
+    float cooltime = 6.0f;
+    float filltime = 1.0f;
+    bool isStart = false;
+
     int score;
     public int SetScore
     {
@@ -66,6 +72,14 @@ public class UI : MonoBehaviour
             float value = curMp / maxMp;
             mpimage.fillAmount = value;
             mptxt.text = $"{(int)(value * maxMp)} / {maxMp}";
+        }
+        if (Input.GetKey(KeyCode.X) && isStart)
+        {
+           isStart = true;
+        }
+        if(isStart == true)
+        {
+
         }
 
     }
