@@ -20,6 +20,7 @@ public class UI : MonoBehaviour
     float maxMp = 100;
     float cooltime = 6.0f;
     float filltime = 1.0f;
+    float setTime = 6.0f;
     bool isStart = false;
 
     int score;
@@ -73,13 +74,31 @@ public class UI : MonoBehaviour
             mpimage.fillAmount = value;
             mptxt.text = $"{(int)(value * maxMp)} / {maxMp}";
         }
-        if (Input.GetKey(KeyCode.X) && isStart)
+        if (Input.GetKey(KeyCode.X))
         {
            isStart = true;
         }
         if(isStart == true)
         {
-
+            float value = cooltime - (filltime * Time.deltaTime);    
+            coolImage.fillAmount += (cooltime -value) / 6;
+            if (setTime > 1)
+            {
+                setTime -= Time.deltaTime;
+                coolText.text = setTime.ToString("0");
+            }else
+            {
+                setTime -= Time.deltaTime;
+                coolText.text = setTime.ToString("0.0");
+            }
+            if (coolImage.fillAmount >= 1)
+            {
+                coolImage.fillAmount = 0;
+                coolText.text = 6.ToString("6");
+                setTime = 6.0f;
+                isStart = false;
+            }
+            
         }
 
     }
