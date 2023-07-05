@@ -74,32 +74,34 @@ public class UI : MonoBehaviour
             mpimage.fillAmount = value;
             mptxt.text = $"{(int)(value * maxMp)} / {maxMp}";
         }
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.X) && isStart == false)
         {
            isStart = true;
+           setTime = 6.0f;
+           coolImage.fillAmount = 0;
+           coolText.text = 6.ToString("0");
+           coolImage.gameObject.SetActive(true);
+           coolText.gameObject.SetActive(true);
         }
         if(isStart == true)
         {
-            float value = cooltime - (filltime * Time.deltaTime);    
+            float value = cooltime - (filltime * Time.deltaTime);
             coolImage.fillAmount += (cooltime -value) / 6;
+            setTime -= Time.deltaTime;
+
             if (setTime > 1)
             {
-                setTime -= Time.deltaTime;
                 coolText.text = setTime.ToString("0");
             }else
             {
-                setTime -= Time.deltaTime;
                 coolText.text = setTime.ToString("0.0");
             }
-            if (coolImage.fillAmount >= 1)
+            if (setTime <= 0)
             {
-                coolImage.fillAmount = 0;
-                coolText.text = 6.ToString("6");
-                setTime = 6.0f;
+                coolImage.gameObject.SetActive(false);
+                coolText.gameObject.SetActive(false);
                 isStart = false;
             }
-            
         }
-
     }
 }
