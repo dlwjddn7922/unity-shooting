@@ -77,14 +77,16 @@ public class Player : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<EnemyBulletA>())
+        /*if(collision.GetComponent<EnemyBulletA>())
         {
             collision.GetComponent<EnemyBulletA>().Hit();
-        }
+            OnDamaged();
+        }*/
 
-        if (collision.transform.GetComponent<Enemy>())
+        if (collision.gameObject.tag == "Enemy")
         {
             Destroy(collision.gameObject);
+            OnDamaged();
         }
         if (collision.GetComponent<BoomItem>())
         {
@@ -98,5 +100,17 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+    }
+    public void OnDamaged()
+    {
+        gameObject.layer = 7;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
+
+        Invoke("OffDamaged", 2f);
+    }
+    void OffDamaged()
+    {
+        gameObject.layer = 8;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
     }
 }
