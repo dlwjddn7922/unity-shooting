@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerBullet bullet;
     [SerializeField] private Transform parent;
     [SerializeField] private Transform bulletParent;
+    
     enum Direction //애니메이션의 상태값
     {
         Center,
@@ -77,11 +78,10 @@ public class Player : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        /*if(collision.GetComponent<EnemyBulletA>())
+        if(collision.GetComponent<EnemyBulletA>())
         {
             collision.GetComponent<EnemyBulletA>().Hit();
-            OnDamaged();
-        }*/
+        }
 
         if (collision.gameObject.tag == "Enemy")
         {

@@ -14,6 +14,9 @@ public class UI : MonoBehaviour
     [SerializeField] private TMP_Text mptxt;
     [SerializeField] private Image coolImage;
     [SerializeField] private TMP_Text coolText;
+    [SerializeField] private Button button;
+    [SerializeField] private SpecialBullet spBullet;
+
     float curHp = 100;
     float maxHp = 100;
     float curMp = 100;
@@ -43,6 +46,8 @@ public class UI : MonoBehaviour
         value = curMp / maxMp;
         mpimage.fillAmount = value;
         mptxt.text = $"{(int)(value * 100f)} / {maxMp}";
+
+        button.onClick.AddListener(OnSpecialFire);
     }
     public void Update()
     {
@@ -76,15 +81,20 @@ public class UI : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.X) && isStart == false)
         {
+           
            isStart = true;
            setTime = 6.0f;
            coolImage.fillAmount = 0;
            coolText.text = 6.ToString("0");
            coolImage.gameObject.SetActive(true);
            coolText.gameObject.SetActive(true);
+           spBullet.OnShow();
+
         }
         if(isStart == true)
         {
+            spBullet.power = 100;
+            
             float value = cooltime - (filltime * Time.deltaTime);
             coolImage.fillAmount += (cooltime -value) / 6;
             setTime -= Time.deltaTime;
@@ -102,6 +112,46 @@ public class UI : MonoBehaviour
                 coolText.gameObject.SetActive(false);
                 isStart = false;
             }
+            
         }
+    }
+    public void OnSpecialFire()
+    {
+        if(isStart == false)
+        {           
+            spBullet.OnHide();
+            isStart = true;
+            setTime = 6.0f;
+            coolImage.fillAmount = 0;
+            coolText.text = 6.ToString("0");
+            coolImage.gameObject.SetActive(true);
+            coolText.gameObject.SetActive(true);
+        }
+        if (isStart == true)
+        {
+            spBullet.power = 100;
+            spBullet.OnShow();
+            float value = cooltime - (filltime * Time.deltaTime);
+            coolImage.fillAmount += (cooltime - value) / 6;
+            setTime -= Time.deltaTime;
+
+            if (setTime > 1)
+            {
+                coolText.text = setTime.ToString("0");
+            }
+            else
+            {
+                coolText.text = setTime.ToString("0.0");
+            }
+            if (setTime <= 0)
+            {
+                coolImage.gameObject.SetActive(false);
+                coolText.gameObject.SetActive(false);
+                isStart = false;
+            }
+
+
+        }
+
     }
 }

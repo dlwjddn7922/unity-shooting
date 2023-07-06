@@ -72,6 +72,10 @@ public abstract class Enemy : MonoBehaviour
             Destroy(collision.gameObject);
             Hit(collision.GetComponent<PlayerBullet>().power);
         }
+        if (collision.GetComponent<SpecialBullet>())
+        {
+            Hit(collision.GetComponent<SpecialBullet>().power);
+        }
     }
 
     public virtual void Init()
@@ -112,13 +116,13 @@ public abstract class Enemy : MonoBehaviour
         }
         
     }
+
     public void Hit(float dmg)
     {
         sa.SetSprite(nomalSP, hitSP, 0.2f, 0.05f);
         data.hp -= dmg;
         if(data.hp <= 0)
         {
-
             Dead();
         }
     }
