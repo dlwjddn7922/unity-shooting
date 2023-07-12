@@ -76,6 +76,11 @@ public abstract class Enemy : MonoBehaviour
         {
             Hit(collision.GetComponent<SpecialBullet>().power);
         }
+        if (collision.GetComponent<FollowerBullet>())
+        {
+            Destroy(collision.gameObject);
+            Hit(collision.GetComponent<FollowerBullet>().power);
+        }
     }
 
     public virtual void Init()

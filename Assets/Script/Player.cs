@@ -94,11 +94,13 @@ public class Player : MonoBehaviour
         }
         if (collision.GetComponent<PowerItem>())
         {
+            //GetComponent<Follower>().enabled = true;
             Destroy(collision.gameObject);
         }
         if (collision.GetComponent<CoinItem>())
         {
             Destroy(collision.gameObject);
+            UI.instance.SetScore += 30;
         }
     }
     public void OnDamaged()
