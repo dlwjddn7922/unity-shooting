@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,8 @@ public class SimpleToggle : MonoBehaviour
 {
     [SerializeField] private Toggle[] toggles;
     [SerializeField] private Image image;
-    //[SerializeField] private Image image;
-    // Start is called before the first frame update
+    [SerializeField] private Color[] colors;
+
     void Start()
     {
         
@@ -29,7 +30,9 @@ public class SimpleToggle : MonoBehaviour
             if (toggles[i] == toggle && toggle.isOn == true)
             {
                 Debug.Log(toggles[i].gameObject.name);
-                //image.color = toggle.GetComponent<ToggleColor>().color;
+                //image.color = colors[i];
+                image.color = colors[i];
+                break;
                 
             }
         }

@@ -5,6 +5,6 @@ using UnityEngine;
 public class ToggleColor : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private Color color;
+    [SerializeField] public Color color;
 
 }

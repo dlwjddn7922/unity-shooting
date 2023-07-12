@@ -10,7 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerBullet bullet;
     [SerializeField] private Transform parent;
     [SerializeField] private Transform bulletParent;
-    
+    [SerializeField] private Transform follower1;
+    [SerializeField] private Transform follower2;
+    Follower follower;
+
     enum Direction //애니메이션의 상태값
     {
         Center,
@@ -94,8 +97,9 @@ public class Player : MonoBehaviour
         }
         if (collision.GetComponent<PowerItem>())
         {
-            //GetComponent<Follower>().enabled = true;
             Destroy(collision.gameObject);
+            follower1.gameObject.SetActive(true);
+            follower2.gameObject.SetActive(true);
         }
         if (collision.GetComponent<CoinItem>())
         {
