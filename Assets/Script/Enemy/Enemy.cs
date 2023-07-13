@@ -145,7 +145,7 @@ public abstract class Enemy : MonoBehaviour
                 //아이템 생성
                 int rand = Random.Range(1, 101);
 
-                string spawnStr = rand < 60 ? "Coin" : rand < 80 ? "Power" : "Boom";
+                string spawnStr = rand < 80 ? "Coin" : rand < 90 ? "Power" :  "Boom";
                 for (int i = 0; i < items.Count; i++)
                 {
                    if(items[i].name == spawnStr)
