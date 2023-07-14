@@ -22,13 +22,13 @@ public class ButtonChange : MonoBehaviour
     {
         if (toggle.isOn == true)
         {
-            transform.Translate(new Vector3(20f, 0, 0));
-            image.color = Color.green;
+            image.transform.Translate(new Vector3(20f, 0, 0));
+            toggle.image.color = Color.green;
         }
         if(toggle.isOn == false)
         {
-            transform.Translate(new Vector3(-20f, 0, 0));
-            image.color = Color.white;
+            image.transform.Translate(new Vector3(-20f, 0, 0));
+            toggle.image.color = Color.white;
         }
     }
 }
