@@ -5,6 +5,7 @@ using TMPro;
 public class SimpleDropDown : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown dropDown;
+    [SerializeField] private Sprite sp;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class SimpleDropDown : MonoBehaviour
         {
             TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData();
             data.text = str[i];
+            data.image = sp;
             od.Add(data);
         }
         dropDown.options = od;
