@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public enum ItemType
 {
@@ -11,6 +12,7 @@ public enum ItemType
 }
 public class ItemData
 {
+    public int index;
     public Sprite sprite;
     public int enchan;
     public bool isEquip;
@@ -20,6 +22,8 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private InvenItem prefab;
     [SerializeField] private Transform parent;
+    [SerializeField] private Transform tempInven;
+
     [SerializeField] private Toggle[] toggles;
 
     //아이템 데이터/////////////////
@@ -33,6 +37,7 @@ public class Inventory : MonoBehaviour
     Dictionary<string, List<ItemData>> itemDic = new Dictionary<string, List<ItemData>>();
     List<InvenItem> invenItems = new List<InvenItem>();
     // Start is called before the first frame update
+    int createCount = 1;
     void Start()
     {
         CreateData(weaponS, ItemType.Weapon);
@@ -48,6 +53,7 @@ public class Inventory : MonoBehaviour
         {
             string key = keys[Random.Range(0, keys.Length)];
             ItemData data = itemDic[key][Random.Range(0, itemDic[key].Count)];
+            data.index = createCount++;
             InvenItem item = Instantiate(prefab, parent);
             item.SetData(data);
 
@@ -80,8 +86,32 @@ public class Inventory : MonoBehaviour
                 break;
             }
         }
-
+        
         for (int i = 0; i < invenItems.Count; i++)
+        {
+            invenItems[i].transform.SetParent(tempInven);
+        }
+        List<InvenItem> items = new List<InvenItem>();
+        for (int i = 0; i < tempInven.childCount; i++)
+        {
+            InvenItem item = tempInven.GetChild(i).GetComponent<InvenItem>();
+            if(type == item.data.type)
+            {
+                items.Add(item);
+                //invenItems[i].transform.SetParent(parent);
+            }
+        }
+        //items.Sort();
+        invenItems.Sort((a,b) => a.data.index.CompareTo(b.data.index));
+        invenItems.Reverse();
+        foreach (var item in items)
+        {
+            item.transform.SetParent(parent);
+        }
+
+
+
+       /* for (int i = 0; i < invenItems.Count; i++)
         {
             if(type == invenItems[i].data.type)
             {
@@ -91,7 +121,7 @@ public class Inventory : MonoBehaviour
             {
                 invenItems[i].gameObject.SetActive(false);
             }
-        }
+        }*/
     }
-
+    
 }

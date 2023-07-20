@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InvenItem : MonoBehaviour
+public class InvenItem : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] private Image icon;
     [SerializeField] private TMPro.TMP_Text enchanTxt;
@@ -26,8 +27,28 @@ public class InvenItem : MonoBehaviour
         this.data = data;
 
         icon.sprite = data.sprite;
-        enchanTxt.text = data.enchan.ToString();
+        enchanTxt.text = data.enchan.ToString("+0");
         equip.SetActive(data.isEquip);
     }
-    
+    public void OnClick()
+    {
+        Debug.Log(data.index);
+    }
+    //drag
+    Vector2 pos;
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        pos = transform.position;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+       pos = GetComponent<RectTransform>().anchoredPosition += eventData.delta;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        pos = GetComponent<RectTransform>().anchoredPosition += eventData.delta;
+
+    }
 }
